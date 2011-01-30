@@ -1,7 +1,10 @@
 #include "ofxAssimpModelLoader.h"
 
 #include "aiConfig.h"
+<<<<<<< HEAD
+=======
 #include <assert.h>
+>>>>>>> 510c380ba1536c0af2eb6bce86e6f44d9ca73dfc
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 

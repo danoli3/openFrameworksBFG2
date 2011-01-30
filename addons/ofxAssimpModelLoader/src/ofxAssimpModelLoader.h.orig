@@ -1,8 +1,11 @@
 
+<<<<<<< HEAD
 // assimp include files. These three are usually needed.
 #include "assimp.h"
 #include "aiPostProcess.h"
 #include "aiScene.h"
+=======
+>>>>>>> 510c380ba1536c0af2eb6bce86e6f44d9ca73dfc
 
 #pragma once
 
