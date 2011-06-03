@@ -8,18 +8,10 @@ import glob
 
 
 of_root = os.path.realpath(__file__)[0:-(len(os.path.join('scripts','linux','createProject.py'))+2)]
-platform = 'linux'
-
-arch = 'linux'
-
-uname = os.uname()
-for uname_str in uname:
-    if uname_str=='x86_64':
-        arch = 'linux64'
-        
-templates_path = os.path.join(of_root,'apps','devApps',platform)
-template = {'cbp': os.path.join(templates_path , 'emptyExample_' + arch + '.cbp'), 'full_cbp': os.path.join(templates_path , 'emptyExample_' + arch + '_fullCBP.cbp'), 'makefile': os.path.join(templates_path , 'Makefile'), 'config.make': os.path.join(templates_path , 'config.make')}
-
+platform = 'win_cb'
+arch = 'win_cb'
+templates_path = os.path.join(of_root,'apps','devApps','win_cb')
+template = {'cbp': os.path.join(templates_path , 'emptyExample_' + arch + '.cbp'), 'full_cbp': os.path.join(templates_path , 'emptyExample_' + arch + '.cbp'), 'makefile': templates_path + 'Makefile', 'config.make': templates_path + 'config.make'}
 fullCBP = True
 
 def addCBPIncludePath(project,dirpath):
@@ -70,16 +62,16 @@ def addAddon(project,addon):
         print 'error', addon, 'has no src folder'
         return
     if fullCBP:
-        addon_src = os.path.join('..','..','..',os.path.join(of_root,'addons',addon,'src')[len(of_root)+1:])
+        addon_src = os.path.join('..','..','..','addons',addon,'src')
         addCBPIncludePath(project,addon_src)
     for root, dirs, files in os.walk(os.path.join(of_root,'addons',addon,'src')):
         for name in files:
-            basefolder = root[len(of_root)+1:]
+            basefolder = root[len(of_root):]
             filepath = str(os.path.join('..','..','..',basefolder,name))
             addCBPUnit(project,filepath,basefolder)
         if fullCBP:
             for dir in dirs:
-                basefolder = root[len(of_root)+1:]
+                basefolder = root[len(of_root):]
                 dirpath = os.path.join('..','..','..',basefolder,dir)
                 addCBPIncludePath(project,dirpath)
     
@@ -95,7 +87,7 @@ def addAddon(project,addon):
                 addCBPIncludePath(project,os.path.join('..','..','..',basefolder,'include'))
                 for root, dirs, files in os.walk(dirpath):
                     for dir in dirs:
-                        basefolder_addon = root[len(of_root)+1:]
+                        basefolder_addon = root[len(of_root):]
                         dirpath_addon = os.path.join('..','..','..',basefolder_addon,dir)
                         addCBPIncludePath(project,dirpath_addon)
             
@@ -111,10 +103,10 @@ def addAddon(project,addon):
                     libsorder.close()
                 else:
                     for lib in glob.glob(os.path.join(of_root,basefolder,'lib',arch,'*.a')):
-                        baselib = lib[len(of_root)+1:]
+                        baselib = lib[len(of_root):]
                         addCBPLibrary(project,os.path.join('..','..','..',baselib))
                     for lib in glob.glob(os.path.join(of_root,basefolder,'lib',arch,'*.so')):
-                        baselib = lib[len(of_root)+1:]
+                        baselib = lib[len(of_root):]
                         addCBPLibrary(project,os.path.join('..','..','..',baselib))
                         
 
@@ -190,11 +182,11 @@ def createProject(project_path):
 
 parser = argparse.ArgumentParser(description='OF linux project generator')
 parser.add_argument('project_path', metavar='project_path', nargs='?')
-parser.add_argument('-n', '--not_mk', dest='not_mk', action='store_const',
-        default=False, const=True, help='create cbp not dependent on Makefile')
+#parser.add_argument('-n', '--not_mk', dest='not_mk', action='store_const',
+#        default=False, const=True, help='create cbp not dependent on Makefile')
 
 project_path = parser.parse_args().project_path
-fullCBP = parser.parse_args().not_mk
+fullCBP = True #parser.parse_args().not_mk
 
 if project_path==None: #parse all examples
     for example in os.listdir(os.path.join(of_root,'apps','examples')):
