@@ -5,13 +5,11 @@
 #include "ofBaseSoundStream.h"
 #include "ofTypes.h"
 
-class RtAudio;
-typedef unsigned int RtAudioStreamStatus;
 
-class ofRtAudioSoundStream : public ofBaseSoundStream{
+class ofxiPhoneSoundStream : public ofBaseSoundStream{
 	public:
-		ofRtAudioSoundStream();
-		~ofRtAudioSoundStream();
+		ofxiPhoneSoundStream();
+		~ofxiPhoneSoundStream();
 		
 		void listDevices();
 		void setDeviceID(int deviceID);
@@ -25,24 +23,16 @@ class ofRtAudioSoundStream : public ofBaseSoundStream{
 		void stop();
 		void close();
 		
-		long unsigned long getTickCount();		
-				
+		long unsigned long getTickCount();		 // always returns 0. not implemented on iphone
+	
 		int getNumInputChannels();
 		int getNumOutputChannels();
-	
 		
 	private:
 		long unsigned long	tickCount;
-		ofPtr<RtAudio>		audio;
-		int					sampleRate;
-		int					deviceID;
 		int					nInputChannels;
 		int					nOutputChannels;
-		ofBaseSoundInput *  soundInputPtr;
-		ofBaseSoundOutput * soundOutputPtr;
-		
-		static int rtAudioCallback(void *outputBuffer, void *inputBuffer, unsigned int bufferSize, double streamTime, RtAudioStreamStatus status, void *data);
-
+		int					sampleRate;
 };
 
 
