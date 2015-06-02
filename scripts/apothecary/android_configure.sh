@@ -2,15 +2,15 @@ export ABI=$1
 export LIBSPATH=android/$ABI
 export NDK_PLATFORM=android-19
 export HOST_PLATFORM=linux-x86_64
-export TOOLCHAIN_VERSION=4.8
+export TOOLCHAIN_VERSION=4.9
 if [ $ABI = armeabi-v7a ] || [ $ABI = armeabi ]; then
     export SYSROOT=${NDK_ROOT}/platforms/${NDK_PLATFORM}/arch-arm
     export ANDROID_PREFIX=arm-linux-androideabi
-    export TOOLCHAIN=$ANDROID_PREFIX-4.8
+    export TOOLCHAIN=$ANDROID_PREFIX-4.9
 elif [ $ABI = x86 ]; then
     export SYSROOT=${NDK_ROOT}/platforms/${NDK_PLATFORM}/arch-x86
     export ANDROID_PREFIX=i686-linux-android
-    export TOOLCHAIN=x86-4.8
+    export TOOLCHAIN=x86-4.9
 fi
 export TOOLCHAIN_PATH=${NDK_ROOT}/toolchains/${TOOLCHAIN}/prebuilt/${HOST_PLATFORM}/bin/
 export CC=${NDK_ROOT}/toolchains/${TOOLCHAIN}/prebuilt/${HOST_PLATFORM}/bin/${ANDROID_PREFIX}-gcc
@@ -28,5 +28,5 @@ elif [ $ABI = armeabi ]; then
     export LDFLAGS="$LDFLAGS -Wl,--fix-cortex-a8 -shared -Wl,--no-undefined"
 elif [ $ABI = x86 ]; then
     export CFLAGS="$CFLAGS  -march=i686 -msse3 -mstackrealign -mfpmath=sse -fno-stack-protector"
-    export LDFLAGS="$LDFLAGS"
+    export LDFLAGS="$LDFLAGS  -march=i686"
 fi
