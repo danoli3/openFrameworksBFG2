@@ -17,7 +17,6 @@
 #
 ################################################################################
 
-
 ################################################################################
 # include common rules
 #
@@ -28,7 +27,6 @@
 
 include $(OF_SHARED_MAKEFILES_PATH)/config.linux.common.mk
 
-PLATFORM_DEFINES += LINUX
 
 ################################################################################
 # PLATFORM CFLAGS
@@ -68,9 +66,9 @@ PLATFORM_CFLAGS += -pipe
 # Note: Leave a leading space when adding list items with the += operator
 ################################################################################
 
-PLATFORM_LIBRARIES += GLESv1_CM
-PLATFORM_LIBRARIES += GLESv2
-PLATFORM_LIBRARIES += EGL
+PLATFORM_PKG_CONFIG_LIBRARIES += glesv1_cm
+PLATFORM_PKG_CONFIG_LIBRARIES += glesv2
+PLATFORM_PKG_CONFIG_LIBRARIES += egl
 
 ifeq ($(CROSS_COMPILING),1)	
 	
