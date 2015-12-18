@@ -8,7 +8,7 @@
 #include <ofMainLoop.h>
 #include "ofWindowSettings.h"
 #include "ofConstants.h"
-
+// --- BFG!!
 //========================================================================
 // default windowing
 #ifdef TARGET_NODISPLAY

@@ -26,7 +26,7 @@ public:
 		windowsApps[window] = shared_ptr<ofBaseApp>();
 		currentWindow = window;
 		ofAddListener(window->events().keyPressed,this,&ofMainLoop::keyPressed);
-	}
+	}// --- BFG!!
 
 	void run(shared_ptr<ofAppBaseWindow> window, shared_ptr<ofBaseApp> app);
 	void run(shared_ptr<ofBaseApp> app);
