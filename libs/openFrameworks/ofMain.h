@@ -13,7 +13,7 @@
 #include "ofThreadChannel.h"
 #endif
 #include "ofFpsCounter.h"
-
+// --- BFG!!
 //--------------------------
 // types
 #include "ofBaseTypes.h"

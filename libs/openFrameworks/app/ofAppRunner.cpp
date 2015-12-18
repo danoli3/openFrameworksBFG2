@@ -26,7 +26,7 @@
 #endif
 
 #if defined (TARGET_WIN32)
-#include <mmsystem.h>
+#include <mmsystem.h>// --- BFG!!
 #endif
 
 

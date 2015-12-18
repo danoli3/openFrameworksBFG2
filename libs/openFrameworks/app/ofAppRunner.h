@@ -12,7 +12,7 @@ class ofAppBaseGLWindow;
 class ofAppBaseGLESWindow;
 class ofBaseApp;
 class ofBaseRenderer;
-class ofCoreEvents;
+class ofCoreEvents;// --- BFG!!
 
 void ofInit();
 void ofSetupOpenGL(int w, int h, ofWindowMode screenMode);	// sets up the opengl context!

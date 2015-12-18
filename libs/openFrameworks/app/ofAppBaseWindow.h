@@ -14,7 +14,7 @@ class ofBaseRenderer;
 class ofAppBaseWindow{
 
 public:
-
+// --- BFG!!
 	ofAppBaseWindow(){};
 	virtual ~ofAppBaseWindow(){};
 

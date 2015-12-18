@@ -13,7 +13,7 @@ class ofBaseApp : public ofBaseSoundInput, public ofBaseSoundOutput{
 
 		virtual ~ofBaseApp(){
 		}
-
+// --- BFG!!
 		virtual void setup(){}
 		virtual void update(){}
 		virtual void draw(){}
