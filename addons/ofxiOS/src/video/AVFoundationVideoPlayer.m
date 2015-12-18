@@ -276,10 +276,8 @@ static const NSString * ItemStatusContext;
                                          object:self.playerItem];
                 
                 [_player replaceCurrentItemWithPlayerItem:self.playerItem];
-				
+                
                 [self addTimeObserverToPlayer];
-				
-                _player.volume = volume;
             }
             else {
                 NSLog(@"The asset's tracks were not loaded:\n%@", [error localizedDescription]);
@@ -328,7 +326,7 @@ static const NSString * ItemStatusContext;
     }
     
     //------------------------------------------------------------ add audio output.
-    double preferredHardwareSampleRate = [[AVAudioSession sharedInstance] currentHardwareSampleRate];
+    double preferredHardwareSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     
     AudioChannelLayout channelLayout;
     bzero(&channelLayout, sizeof(channelLayout));
@@ -847,7 +845,19 @@ static const NSString * ItemStatusContext;
         return;
     }
     
-    _player.volume = volume;
+    NSArray * audioTracks = [self.asset tracksWithMediaType:AVMediaTypeAudio];
+    NSMutableArray * allAudioParams = [NSMutableArray array];
+    for(AVAssetTrack * track in audioTracks) {
+        AVMutableAudioMixInputParameters * audioInputParams = [AVMutableAudioMixInputParameters audioMixInputParameters];
+        [audioInputParams setVolume:volume atTime:kCMTimeZero];
+        [audioInputParams setTrackID:[track trackID]];
+        [allAudioParams addObject:audioInputParams];
+    }
+    
+    AVMutableAudioMix * audioMix = [AVMutableAudioMix audioMix];
+    [audioMix setInputParameters:allAudioParams];
+        
+    [self.playerItem setAudioMix:audioMix];
 }
 
 - (float)getVolume {
